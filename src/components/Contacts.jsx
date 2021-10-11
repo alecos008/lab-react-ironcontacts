@@ -1,9 +1,29 @@
 import React, { Component } from "react";
 import contacts from "../contacts.json";
+import DeleteIcon from "@mui/icons-material/Delete";
+import Button from "@mui/material/Button";
+import { Rowing } from "@mui/icons-material";
 
 const contactCardStyle = {
   display: "flex",
   columnGap: "50px",
+};
+
+const headingStyle = {
+  borderCollapse: "collapse",
+  border: "2px solid white",
+  color: "white",
+  fontSize: "25px",
+};
+
+const deleteBtnSyles = {
+  backgroundColor: "#009100",
+  color: "white",
+};
+
+const handleBtn = {
+  margin: "30px 10px 30px 10px",
+  backgroundColor: "#8061b6",
 };
 
 const initialContacts = contacts.slice(0, 5);
@@ -65,35 +85,68 @@ class Contacts extends Component {
         }}
       >
         <div>
-          <h2>Generate Random Contact</h2>
-          <button onClick={this.handleAddContact}>Add Random Contact</button>
-          <button onClick={this.handleSortByName}>Sort by name</button>
-          <button onClick={this.handleSortByPop}>Sort by popularity</button>
+          <Button
+            style={handleBtn}
+            className="handle-btn"
+            variant="contained"
+            onClick={this.handleAddContact}
+          >
+            Add Random Contact
+          </Button>
+
+          <Button
+            style={handleBtn}
+            className="handle-btn"
+            variant="contained"
+            onClick={this.handleSortByName}
+          >
+            Sort By Name
+          </Button>
+
+          <Button
+            style={handleBtn}
+            className="handle-btn"
+            variant="contained"
+            onClick={this.handleSortByPop}
+          >
+            Sort By Popularity
+          </Button>
         </div>
-        <h1>Contact List</h1>
-        <table>
-          <th>Name</th>
-          <th>Popularity</th>
-          <th>Action</th>
+        <table
+          style={{
+            width: "40vw",
+            borderCollapse: "collapse",
+            border: "2px solid white",
+            backgroundColor: "#3c2d6d",
+          }}
+        >
+          <th style={headingStyle}>Contact Pic</th>
+          <th style={headingStyle}>Name</th>
+          <th style={headingStyle}>Popularity</th>
+          <th style={headingStyle}>Action</th>
 
           {this.state.contactsList.map((contact) => (
             <tr>
-              <td>
+              <td style={headingStyle}>
                 <img
                   src={contact.pictureUrl}
                   alt="Contact Picture"
                   style={{ width: "100px", height: "150px" }}
                 />
               </td>
-              <td>
+              <td style={headingStyle}>
                 <p>{contact.name}</p>
               </td>
-              <td>
+              <td style={headingStyle}>
                 <p>{contact.popularity.toFixed(2)}</p>
               </td>
-              <td>
-                <button onClick={() => this.handleRemove(contact.id)}>
-                  Delete
+              <td style={headingStyle}>
+                <button
+                  className="delete-btn"
+                  style={deleteBtnSyles}
+                  onClick={() => this.handleRemove(contact.id)}
+                >
+                  <DeleteIcon className="delete-icon" />
                 </button>
               </td>
             </tr>
